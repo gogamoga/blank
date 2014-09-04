@@ -18,7 +18,7 @@ sh init
 ![Initial State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
 
 ### Flow
-![init flow](http://yuml.me/diagram/plain/activity/(start)->(read args)-><a>,<a>->(check clean)-><b>,<a>->(check exists)-><c>,<b>->(init defaults)->(end),<b>->(abort)->(end),<c>->(init branch)->(end),<c>->(abort))
+![init flow](http://yuml.me/diagram/plain/activity/(start)->(check args)-><a>,<a>->(check clean)-><b>,<a>->(check exists)-><c>,<b>->(init defaults)->(end),<b>->(abort)->(end),<c>->(init branch)->(end),<c>->(abort))
 
 ### Post-Init repository state
 ![Post-Init state](http://yuml.me/diagram/plain;dir:LR/class/[Scaffold]-[Workflow|init;release;clean],[Workflow]-[Templates|base;development;{bg:orange}],[Scaffold]-[Base|.gitattributes;{bg:green}],[Scaffold]-[Development|.gitattributes;{bg:green}],[Templates]->[Development],[Templates]->[Base])
@@ -35,6 +35,7 @@ sh init
 ---
 
 ### Flow
+![clean flow](http://yuml.me/diagram/plain/activity/(start)->(keep workflow)->(remove branches)->(remove tags)->(end))
 
 ### Post-Clean repository state
 ![Post-Clean State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
