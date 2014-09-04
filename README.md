@@ -27,6 +27,8 @@ sh init
 ---
 
 ### Flow
+![release flow](http://yuml.me/diagram/plain/activity/(start)->(check args)-><a>,<a>->(checkout default base)-><b>,<a>->(checkout base)-><b>,<b>->(merge from deault development)-><c>,<b>->(merge from development)-><c>,<c>->(merge into default release)->(end),
+<c>->(merge into release)->(end))
 
 ### Post-Release repository state
 ![Post-Release state](http://yuml.me/diagram/plain;dir:LR/class/[Scaffold]-[Workflow|init;release;clean],[Workflow]-[Templates|base;development],[Scaffold]-[Base|.gitattributes;{bg:orange}],[Scaffold]-[Development|.gitattributes;{bg:orange}],[Scaffold]-[Release{bg:green}],[Release]<-[Development],[Release]<-[Base])
