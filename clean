@@ -1,1 +1,23 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+
+getopts hf force 
+
+if [ "$force" = h ]; then
+	cat <<-EOFUSAGE
+		Usage: sh ${0##*/} [-f]
+		Clean the working tree
+	EOFUSAGE
+	exit 0
+fi
+
+if [ "$force" != f ]; then
+	read -p "Clean working tree? [y/N]" -r confirmed
+	if [ "$confirmed" != y ]; then
+		echo Aborted >&2
+		exit 0
+	fi
+fi
+
+for b in `git branch --list | grep -vE '^\*'`; do git branch -D $b; done
+for t in `git tag`; do git tag -d $t; done
+
