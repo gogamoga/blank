@@ -41,3 +41,7 @@ sh init
 
 ### Post-Clean repository state
 ![Post-Clean State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
+
+License
+---
+[MIT](LICENSE)
