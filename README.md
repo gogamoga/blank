@@ -1,6 +1,16 @@
 Barebone Scaffold
 ===
 
+Usage
+---
+
+```sh
+proj=foo
+git clone https://github.com/nhzio/bones.git $proj
+cd $proj
+sh init
+```
+
 ### Initial repository state
 ![Initial State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
 
