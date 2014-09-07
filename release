@@ -1,1 +1,75 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+
+workflow=`git rev-parse --abbrev-ref HEAD`
+
+check_branch()
+{
+	for branch in "$@"; do
+		if [ -z "`git branch --list $branch`" ]; then
+			errors="$errors""Branch: $branch does not exist!\n"
+		fi
+	done
+}
+
+make_release()
+{
+	base=`git rev-parse "$1"`
+	development=`git rev-parse "$2"`
+	target="$3"
+	message="$4"
+	release=`git rev-parse --verify -q "$target"`
+	git checkout -q $development
+	files=`git ls-files | git check-attr --stdin norelease | sed -n 's/:\s*norelease\s*:\s*unspecified//p'`
+	if [ -z "$files" ]; then echo "Nothing to release" >&2 && git checkout -q $workflow && exit 1; fi
+	git checkout -q $base
+	git checkout -q $development -- $files
+	git commit -qm "$message"
+	if [ -z "$release" ]; then
+		git checkout -qb "$target"
+		git commit --amend --no-edit -m "$message"
+		git commit --amend
+	else
+		release=`git rev-parse HEAD`
+		git checkout -qf "$target"
+		git merge -X theirs $release -m "$message"
+		git add .
+		git commit --amend
+	fi
+}
+
+getopts h force
+
+if [ "$force" = h ]; then
+	cat <<-EOFUSAGE
+		Usage: sh ${0##*/} [<base> <development> <target> [<message>]]
+		Make release
+		base - base branch
+		template - template branch
+		master - release target branch
+		message - release message
+		Default behavior: merge development into base and create master out of it
+	EOFUSAGE
+	exit 0
+fi
+
+if [ $# -eq 0 ]; then
+	base="base"
+	development="dev"
+	target="master"
+	message="Release"
+else
+	if [ $# < 3 ]; then
+		echo Bad arguments >&2
+		exit 1
+	fi
+	base="$1"
+	development="$2"
+	target="$3"
+	message="$4"
+fi
+
+check_branch $base $development
+if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
+
+make_release $base $development $target $message
+git checkout -f $workflow
