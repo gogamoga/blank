@@ -1,1 +1,76 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+
+templates="./templates"
+errors=""
+
+check_branch()
+{
+	for branch in "$@"; do
+		if [ ! -z "`git branch --list $branch`" ]; then
+			errors="$errors""Branch: $branch exists!\n"
+		fi
+	done
+}
+
+check_template()
+{
+	for template in "$@"; do
+		if [ ! -d "$templates/$template" ]; then
+			errors="$errors""Template: $template does not exist!\n"
+		fi
+	done
+}
+
+create_branch()
+{
+	branch="$1"
+	template="$2"
+	workflow=`git rev-parse --abbrev-ref HEAD`
+	tempdir=`mktemp -d -p ./`
+	find "$templates/$template" -mindepth 1 -maxdepth 1 -exec mv -t"./$tempdir" -- {} +
+	git rm -qrf .
+	find "$tempdir" -mindepth 1 -maxdepth 1 -exec mv -t. -- {} +
+	rm -rf "$tempdir" &> /dev/null
+	git add .
+	tree=`git write-tree`
+	commit=`git commit-tree "$tree" -m "Initialized $branch from $template template"`
+	git update-ref "refs/heads/$branch" "$commit"
+	git checkout -qf "$workflow"
+	echo "Initialized branch: $branch from template: $template"
+}
+
+getopts h force
+
+if [ "$force" = h ]; then
+	cat <<-EOFUSAGE
+		Usage: sh ${0##*/} [<branch> <template>]
+		Initialize branch.
+		branch - branch name to create
+		template - template to use (should exist in templates/)
+		Default behavior: initialize dev and base branches
+	EOFUSAGE
+	exit 0
+fi
+
+if [ $# -eq 0 ]; then
+	check_branch base dev
+	if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
+	check_template base development
+	if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
+	create_branch base base
+	create_branch dev development
+	exit 0
+fi
+
+if [ $# -ne 2 ]; then
+	echo Bad arguments >&2
+	exit 1
+fi
+
+branch="$1"
+template="$2"
+check_branch "$branch"
+if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
+check_template "$template"
+if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
+create_branch "$branch" "$template"
