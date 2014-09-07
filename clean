@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-getopts hf force 
+getopts hf force
 
 if [ "$force" = h ]; then
 	cat <<-EOFUSAGE
@@ -20,4 +20,3 @@ fi
 
 for b in `git branch --list | grep -vE '^\*'`; do git branch -D $b; done
 for t in `git tag`; do git tag -d $t; done
-
