@@ -1,16 +1,6 @@
 Barebone Scaffold
 ===
 
-Usage
----
-
-```sh
-proj=foo
-git clone https://github.com/nhzio/bones.git $proj
-cd $proj
-sh init
-```
-
 [`init`](init)
 ---
 
