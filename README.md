@@ -1,46 +1,40 @@
-Barebone Scaffold
+Webdev Scaffold
 ===
 
-Usage
+Setup
 ---
 
 ```sh
 proj=foo
-git clone https://github.com/nhzio/bones.git $proj
+git clone https://github.com/gogamatic/blank.git $proj
 cd $proj
+git remote rename origin blank
 sh init
 ```
 
-[`init`](init)
+Usage
 ---
 
-### Initial repository state
-![Initial State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
+Do your work on `dev` branch
 
-### Flow
-![init flow](http://yuml.me/diagram/plain/activity/(start)->(check args)-><a>,<a>->(check clean)-><b>,<a>->(check exists)-><c>,<b>->(init defaults)->(end),<b>->(abort)->(end),<c>->(init branch)->(end),<c>->(abort))
+```sh
+cd $proj
+git checkout dev
+```
 
-### Post-Init repository state
-![Post-Init state](http://yuml.me/diagram/plain;dir:LR/class/[Scaffold]-[Workflow|init;release;clean],[Workflow]-[Templates|base;development;{bg:orange}],[Scaffold]-[Base|.gitattributes;{bg:green}],[Scaffold]-[Development|.gitattributes;{bg:green}],[Templates]->[Development],[Templates]->[Base])
-
-[`release`](release)
+Release
 ---
 
-### Flow
-![release flow](http://yuml.me/diagram/plain/activity/(start)->(check args)-><a>,<a>->(checkout default base)-><b>,<a>->(checkout base)-><b>,<b>->(merge from deault development)-><c>,<b>->(merge from development)-><c>,<c>->(merge into default release)->(end),
-<c>->(merge into release)->(end))
+```sh
+cd $proj
+git checkout workflow
+sh release base dev master
+```
 
-### Post-Release repository state
-![Post-Release state](http://yuml.me/diagram/plain;dir:LR/class/[Scaffold]-[Workflow|init;release;clean],[Workflow]-[Templates|base;development],[Scaffold]-[Base|.gitattributes;{bg:orange}],[Scaffold]-[Development|.gitattributes;{bg:orange}],[Scaffold]-[Release{bg:green}],[Release]<-[Development],[Release]<-[Base])
-
-[`clean`](clean)
+Templates
 ---
-
-### Flow
-![clean flow](http://yuml.me/diagram/plain/activity/(start)->(keep workflow)->(remove branches)->(remove tags)->(end))
-
-### Post-Clean repository state
-![Post-Clean State](http://yuml.me/diagram/plain/class/[Scaffold]-[Workflow|init;release;clean;],[Workflow]-[Templates|base;development;])
+* [`base-node`](./templates/base-node/README.md)
+* [`dev-node`](./templates/dev-node/README.md)
 
 License
 ---
