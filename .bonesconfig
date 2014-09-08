@@ -1,0 +1,7 @@
+templates="./templates"
+default_base_template="base"
+devault_dev_template="development"
+default_base_branch="base"
+default_dev_branch="dev"
+default_release_branch="master"
+default_release_message="Release"

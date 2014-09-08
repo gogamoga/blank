@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+source "./.bonesconfig"
 workflow=`git rev-parse --abbrev-ref HEAD`
 
 check_branch()
@@ -53,10 +54,10 @@ if [ "$force" = h ]; then
 fi
 
 if [ $# -eq 0 ]; then
-	base="base"
-	development="dev"
-	target="master"
-	message="Release"
+	base="$default_base_branch"
+	development="$default_dev_branch"
+	target="$default_release_branch"
+	message="$default_release_message"
 else
 	if [ $# -lt 3 ]; then
 		echo Bad arguments >&2

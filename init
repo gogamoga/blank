@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-templates="./templates"
+source "./.bonesconfig"
 errors=""
 
 check_branch()
@@ -53,12 +53,12 @@ if [ "$force" = h ]; then
 fi
 
 if [ $# -eq 0 ]; then
-	check_branch base dev
+	check_branch "$default_base_branch" "$default_dev_branch"
 	if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
-	check_template base development
+	check_template "$default_base_template" "$default_dev_template"
 	if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
-	create_branch base base
-	create_branch dev development
+	create_branch "$default_base_branch" "$default_base_template"
+	create_branch "$default_dev_branch" "$default_dev_template"
 	exit 0
 fi
 
