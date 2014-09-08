@@ -1,18 +1,30 @@
 Webdev Scaffold
 ===
 
+Prepare
+---
+```
+proj="YOUR-PROJECT-NAME"
+```
+
 Setup
 ---
-
 ```sh
-proj=foo
 git clone https://github.com/gogamatic/blank.git $proj
 cd $proj
 git remote rename origin blank
 sh init
 ```
 
-Usage
+Add to existing [`blank`]() project
+---
+```sh
+cd $proj
+git remote add blank https://github.com/gogamatic/blank.git
+git pull blank workflow
+```
+
+Use
 ---
 
 Do your work on `dev` branch
