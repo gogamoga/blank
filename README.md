@@ -33,8 +33,8 @@ sh release base dev master
 
 Templates
 ---
-* [`base-node`](./templates/base-node/README.md)
-* [`dev-node`](./templates/dev-node/README.md)
+* [`base-node`](./templates/base-node)
+* [`dev-node`](./templates/dev-node)
 
 License
 ---
