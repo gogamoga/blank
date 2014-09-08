@@ -31,6 +31,11 @@ git checkout workflow
 sh release base dev master
 ```
 
+Templates
+---
+* [`base-node`](./templates/base-node/README.md)
+* [`dev-node`](./templates/dev-node/README.md)
+
 License
 ---
 [MIT](LICENSE)
