@@ -58,7 +58,7 @@ if [ $# -eq 0 ]; then
 	target="master"
 	message="Release"
 else
-	if [ $# < 3 ]; then
+	if [ $# -lt 3 ]; then
 		echo Bad arguments >&2
 		exit 1
 	fi
