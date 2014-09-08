@@ -18,11 +18,11 @@ make_release()
 	target="$3"
 	message="$4"
 	release=`git rev-parse --verify -q "$target"`
-	git checkout -q $development
+	git checkout -q "$development"
 	files=`git ls-files | git check-attr --stdin norelease | sed -n 's/:\s*norelease\s*:\s*unspecified//p'`
-	if [ -z "$files" ]; then echo "Nothing to release" >&2 && git checkout -q $workflow && exit 1; fi
-	git checkout -q $base
-	git checkout -q $development -- $files
+	if [ -z "$files" ]; then echo "Nothing to release" >&2 && git checkout -q "$workflow" && exit 1; fi
+	git checkout -q "$base"
+	git checkout -q "$development" -- "$files"
 	git commit -qm "$message"
 	if [ -z "$release" ]; then
 		git checkout -qb "$target"
@@ -68,8 +68,8 @@ else
 	message="$4"
 fi
 
-check_branch $base $development
+check_branch "$base" "$development"
 if [ ! -z "$errors" ]; then echo -e "$errors"; exit 1; fi
 
-make_release $base $development $target $message
-git checkout -f $workflow
+make_release "$base" "$development" "$target" "$message"
+git checkout -f "$workflow"
