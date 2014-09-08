@@ -22,7 +22,7 @@ make_release()
 	files=`git ls-files | git check-attr --stdin norelease | sed -n 's/:\s*norelease\s*:\s*unspecified//p'`
 	if [ -z "$files" ]; then echo "Nothing to release" >&2 && git checkout -q "$workflow" && exit 1; fi
 	git checkout -q "$base"
-	git checkout -q "$development" -- "$files"
+	git checkout -q "$development" -- $files
 	git commit -qm "$message"
 	if [ -z "$release" ]; then
 		git checkout -qb "$target"
