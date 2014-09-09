@@ -1,17 +1,16 @@
 Webdev Scaffold
 ===
 
-Prepare
+Get it
 ---
-```
-proj="YOUR-PROJECT-NAME"
+```sh
+git clone https://github.com/gogamatic/blank.git PROJECT
+cd PROJECT
 ```
 
 Setup
 ---
 ```sh
-git clone https://github.com/gogamatic/blank.git $proj
-cd $proj
 git remote rename origin blank
 sh init
 ```
@@ -19,7 +18,6 @@ sh init
 Add to existing [`blank`]() project
 ---
 ```sh
-cd $proj
 git remote add blank https://github.com/gogamatic/blank.git
 git pull blank workflow
 ```
@@ -27,18 +25,16 @@ git pull blank workflow
 Use
 ---
 
-Do your work on `dev` branch
-
 ```sh
-cd $proj
 git checkout dev
+npm install
 ```
+Do your work on `dev` branch
 
 Release
 ---
 
 ```sh
-cd $proj
 git checkout workflow
 sh release base dev master
 ```
@@ -47,6 +43,8 @@ Templates
 ---
 * [`base-node`](./templates/base-node)
 * [`dev-node`](./templates/dev-node)
+* [`web-base-node`](/templates/web-base-node)
+* [`web-dev-node`](/templates/web-dev-node)
 
 License
 ---
