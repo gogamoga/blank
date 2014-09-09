@@ -47,6 +47,8 @@ Templates
 ---
 * [`base-node`](./templates/base-node)
 * [`dev-node`](./templates/dev-node)
+* [`web-base-node`](/templates/web-base-node)
+* [`web-dev-node`](/templates/web-dev-node)
 
 License
 ---
