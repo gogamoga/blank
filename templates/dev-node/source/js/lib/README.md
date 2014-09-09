@@ -1,4 +1,4 @@
 Lib
 ===
 
-Contents be merged into lib.js
+Contents will be merged into lib.js
