@@ -15,5 +15,17 @@
     "gulp-jshint": "^1.8.4",
     "gulp-notify": "^1.5.1",
     "gulp-uglify": "^1.0.1"
+  },
+  "blankConfig": {
+    "gulp": {
+      "source": "src",
+      "build": "build",
+      "dist": "dist",
+      "scripts": "js",
+      "concat": {
+        "lib.js": [ "lib/**"],
+        "main.js": ["main/**"]
+      }
+    }
   }
 }
