@@ -25,7 +25,7 @@
       "dist": "dist",
       "scripts": "js",
       "concat": {
-        "lib.js": [ "lib/**" ]
+        "lib.js": [ "lib/**/*.js" ]
       }
     }
   }
