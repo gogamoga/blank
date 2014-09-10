@@ -12,7 +12,7 @@ Usage
 * `gulp clean`
 * `gulp test` - run mocha
 * edit [`gulpfile.js`](./gulpfile.js)
-* custom tree config in [`package.json`](./package.json)
+* gulp config in [`package.json`](./package.json)
  
 Gulp plugins
 ===
