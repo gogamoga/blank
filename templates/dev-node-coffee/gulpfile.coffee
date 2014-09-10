@@ -52,7 +52,7 @@ gulp.task 'copy-dist-test', ->
     .src [ "#{build}/#{test}/**/*", "!#{build}/#{test}/*.js" ]
     .pipe gulp.dest "#{test}"
 
-gulp.task 'copy-dist', ->
+gulp.task 'copy-dist', (cb) ->
   runSequence [ 'copy-dist-source', 'copy-dist-test' ], cb
 
 ### Concatenate ###
@@ -105,7 +105,7 @@ gulp.task 'build-test', ->
   gulp
     .src [ "#{source}/#{test}/**/*.coffee" ]
     .pipe coffee(bare:true).on 'error', util.log
-    pipe gulp.dest build
+    .pipe gulp.dest build
 
 gulp.task 'build', (cb) ->
   runSequence [ 'build-source', 'build-test', 'copy-build' ], 'concat-build', cb
