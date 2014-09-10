@@ -11,10 +11,10 @@ runSequence = require 'run-sequence'
 
 ### Config ###
 config = require('./package.json')['gulp-config'] or {}
-  source = config.source or './source'
-  build = config.build or './build'
-  dist = config.dist or './dist'
-  test = config.test or './test'
+source = config.source or './source'
+build = config.build or './build'
+dist = config.dist or './dist'
+test = config.test or './test'
 
 ### Clean ###
 
@@ -86,7 +86,7 @@ gulp.task 'jshint-source', ->
     .pipe jshint.reporter 'default'
 
 gulp.task 'jshint-test', ->
-  gulp.src ["#{build}/#{test}/**/*.js"]
+  gulp.src [ "#{build}/#{test}/**/*.js" ]
     .pipe jshint '.jshintrc'
     .pipe jshint.reporter 'default'
 
@@ -96,7 +96,7 @@ gulp.task 'jshint', (cb) ->
 ### Build ###
 gulp.task 'build-source', ->
   gulp
-    .src ["#{source}/**/*.coffee", "!#{source}/#{test}/**/*" ]
+    .src [ "#{source}/**/*.coffee", "!#{source}/#{test}/**/*" ]
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest build
 
@@ -125,7 +125,7 @@ gulp.task 'dist-test', ->
     .pipe gulp.dest "./#{test}"
 
 gulp.task 'dist', (cb) ->
-  runSequence 'dist-build', 'dist-test', 'copy-dist'], 'concat-dist', cb
+  runSequence [ 'dist-build', 'dist-test', 'copy-dist' ], 'concat-dist', cb
 
 ### Test ###
 gulp.task 'mocha', ->
