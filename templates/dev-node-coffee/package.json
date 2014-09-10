@@ -1,0 +1,28 @@
+{
+  "name": "dev-node",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^0.1.2",
+    "gulp": "^3.8.8",
+    "gulp-concat": "^2.4.0",
+    "gulp-jshint": "^1.8.4",
+    "gulp-mocha": "^1.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1",
+    "run-sequence": "^0.3.6",
+    "should": "^4.0.4"
+  },
+  "gulp-config": {
+    "source": "./source",
+    "build": "./build",
+    "dist": "./dist",
+    "test": "./test"
+  }
+}
