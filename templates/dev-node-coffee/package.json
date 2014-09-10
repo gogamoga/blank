@@ -14,6 +14,7 @@
     "del": "^0.1.2",
     "gulp": "^3.8.8",
     "gulp-coffee": "^2.2.0",
+    "gulp-coffeelint": "^0.4.0",
     "gulp-concat": "^2.4.0",
     "gulp-js-prettify": "^0.1.0",
     "gulp-jshint": "^1.8.4",
