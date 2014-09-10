@@ -9,7 +9,7 @@ Usage
 * build into `build` directory
 * write tests in `test` directory (mocha)
 * release into `dist` directory
-* `gulp` - run `build`, `dist` sequence
+* `gulp` - `build`, `dist` tasks
 * `gulp clean`
 * `gulp test` - run mocha
 * edit [`gulpfile.js`](./gulpfile.js)
