@@ -25,6 +25,7 @@ Gulp plugins
 * [`gulp-coffee`](https://github.com/wearefractal/gulp-coffee)
 * [`gulp-coffeelint`](https://github.com/janraasch/gulp-coffeelint)
 * [`gulp-js-prettify`](https://github.com/mackers/gulp-js-prettify)
+* [`gulp-util`](https://github.com/gulpjs/gulp-util)
 
 License
 ---
