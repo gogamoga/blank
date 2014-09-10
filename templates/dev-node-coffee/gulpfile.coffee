@@ -31,26 +31,26 @@ gulp.task 'clean', (cb) ->
 ### Copy ###
 gulp.task 'copy-build-source', ->
   gulp
-    .src [ "#{source}/**/*", "!#{source}/**/*.coffee", "!#{source}/#{test}/**/*" ]
+    .src [ "#{source}/**/*", "!#{source}/**/*.coffee", "!#{source}/test/**/*", "!#{source}/test" ]
     .pipe gulp.dest build
 
 gulp.task 'copy-build-test', ->
   gulp
-    .src [ "#{source}/#{test}/**/*", "!#{source}/#{test}/**/*.coffee" ]
-    .pipe gulp.dest "#{build}/#{test}"
+    .src [ "#{source}/test/**/*", "!#{source}/test/**/*.coffee" ]
+    .pipe gulp.dest "#{build}/test"
 
 gulp.task 'copy-build', (cb) ->
   runSequence [ 'copy-build-source', 'copy-build-test' ], cb
 
 gulp.task 'copy-dist-source', ->
   gulp
-    .src [ "#{build}/**/*", "!#{build}/**/*.js", "!#{build}/#{test}/**/*" ]
+    .src [ "#{build}/**/*", "!#{build}/**/*.js", "!#{build}/test/**/*", "!#{build}/test" ]
     .pipe gulp.dest dist
 
 gulp.task 'copy-dist-test', ->
   gulp
-    .src [ "#{build}/#{test}/**/*", "!#{build}/#{test}/*.js" ]
-    .pipe gulp.dest "#{test}"
+    .src [ "#{build}/test/**/*", "!#{build}/test/*.js" ]
+    .pipe gulp.dest test
 
 gulp.task 'copy-dist', (cb) ->
   runSequence [ 'copy-dist-source', 'copy-dist-test' ], cb
@@ -82,12 +82,12 @@ gulp.task 'lint-coffee', (cb) ->
 
 gulp.task 'jshint-source', ->
   gulp
-    .src [ "#{build}/**/*.js", "!#{build}/#{test}/**/*" ]
+    .src [ "#{build}/**/*.js", "!#{build}/test/**/*", "!#{build}/test" ]
     .pipe jshint '.jshintrc'
     .pipe jshint.reporter 'default'
 
 gulp.task 'jshint-test', ->
-  gulp.src [ "#{build}/#{test}/**/*.js" ]
+  gulp.src [ "#{build}/test/**/*.js" ]
     .pipe jshint '.jshintrc'
     .pipe jshint.reporter 'default'
 
@@ -97,15 +97,15 @@ gulp.task 'jshint', (cb) ->
 ### Build ###
 gulp.task 'build-source', ->
   gulp
-    .src [ "#{source}/**/*.coffee", "!#{source}/#{test}/**/*" ]
+    .src [ "#{source}/**/*.coffee", "!#{source}/test/**/*", "!#{source}/test" ]
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest build
 
 gulp.task 'build-test', ->
   gulp
-    .src [ "#{source}/#{test}/**/*.coffee" ]
+    .src [ "#{source}/test/**/*.coffee" ]
     .pipe coffee(bare:true).on 'error', util.log
-    .pipe gulp.dest build
+    .pipe gulp.dest "#{build}/test"
 
 gulp.task 'build', (cb) ->
   runSequence [ 'build-source', 'build-test', 'copy-build' ], 'concat-build', cb
@@ -113,17 +113,17 @@ gulp.task 'build', (cb) ->
 ### Dist ###
 gulp.task 'dist-build', ->
   gulp
-    .src [ "#{build}/**/*.js", "!#{build}/#{test}/**/*" ]
+    .src [ "#{build}/**/*.js", "!#{build}/test/**/*", "!#{build}/test" ]
     .pipe rename suffix: '.min'
     .pipe uglify()
     .pipe gulp.dest dist
 
 gulp.task 'dist-test', ->
   gulp
-    .src [ "#{build}/#{test}/**/*.js" ]
+    .src [ "#{build}/test/**/*.js" ]
     .pipe rename suffix: '.min'
     .pipe uglify()
-    .pipe gulp.dest "./#{test}"
+    .pipe gulp.dest test
 
 gulp.task 'dist', (cb) ->
   runSequence [ 'dist-build', 'dist-test', 'copy-dist' ], 'concat-dist', cb
