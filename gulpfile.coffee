@@ -123,11 +123,62 @@ gulp.task 'jshint-test', ->
 gulp.task 'jshint', (cb) ->
   runSequence ['jshint-source', 'jshint-test'], cb
 
+### Angular Build ###
+
+gulp.task 'build-ng', (cb) ->
+  runSequence [
+    'build-ng-controllers', 'build-ng-directives'
+    'build-ng-factories', 'build-ng-services'
+    'build-ng-modules' ], cb
+
+gulp.task 'build-ng-controllers', ->
+  gulp
+    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest build
+
+gulp.task 'build-ng-services', ->
+  gulp
+    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest build
+
+gulp.task 'build-ng-factories', ->
+  gulp
+    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest build
+
+gulp.task 'build-ng-modules', ->
+  gulp
+    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest build
+
+gulp.task 'build-ng-directives', ->
+  gulp
+    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest build
+
 ### Build ###
+
 gulp.task 'build-coffee', ->
   gulp
-    .src [ "#{source}/**/*.coffee", "!#{source}/test/**/*", "!#{source}/test" ]
-    .pipe ngClassify()
+    .src [
+      "#{source}/**/*.coffee"
+      "!#{source}/test/**/*"
+      "!#{source}/test"
+      "!#{source}/scripts/controller"
+      "!#{source}/scripts/directive"
+      "!#{source}/scripts/service"
+      "!#{source}/scripts/factory"
+      "!#{source}/scripts/module" ]
     .pipe coffee(bare:false).on 'error', util.log
     .pipe gulp.dest build
 
