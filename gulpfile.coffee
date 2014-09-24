@@ -12,6 +12,9 @@ coffeelint = require 'gulp-coffeelint'
 del = require 'del'
 runSequence = require 'run-sequence'
 
+ngClassify = require 'gulp-ng-classify'
+ngAnnotate = require 'gulp-ng-annotate'
+
 ### Config ###
 config = require('./package.json')['gulp-config'] or {}
 source = config.source or './source'
