@@ -121,7 +121,7 @@ gulp.task 'jshint', (cb) ->
   runSequence ['jshint-source', 'jshint-test'], cb
 
 ### Build ###
-gulp.task 'build-source', ->
+gulp.task 'build-coffee', ->
   gulp
     .src [ "#{source}/**/*.coffee", "!#{source}/test/**/*", "!#{source}/test" ]
     .pipe coffee(bare:true).on 'error', util.log
@@ -134,7 +134,7 @@ gulp.task 'build-test', ->
     .pipe gulp.dest "#{build}/test"
 
 gulp.task 'build', (cb) ->
-  runSequence [ 'build-source', 'build-test', 'copy-build' ], 'concat-build', cb
+  runSequence [ 'build-coffee', 'build-test', 'copy-build' ], 'concat-build', cb
 
 ### Build Jade ###
 
