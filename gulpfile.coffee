@@ -134,6 +134,39 @@ gulp.task 'build-test', ->
 gulp.task 'build', (cb) ->
   runSequence [ 'build-source', 'build-test', 'copy-build' ], 'concat-build', cb
 
+# Build Jade
+
+gulp.task 'build-jade'
+
+gulp.task 'build-jade-html', ->
+  gulp
+    .src [
+      "#{source}/**/*.jade"
+      "!#{source}/**/*.xml.jade"
+      "!#{source}/**/*.xsl.jade"
+      "!#{source}/test/**/*"
+      "!#{source}/test" ]
+
+    .pipe gulp.dest build
+
+gulp.task 'build-jade-xml', ->
+  gulp
+    .src [
+      "#{source}/**/*.xml.jade"
+      "!#{source}/test/**/*"
+      "!#{source}/test" ]
+
+    .pipe gulp.dest build
+
+gulp.task 'build-jade-xsl', ->
+  gulp
+    .src [
+      "#{source}/**/*.xsl.jade"
+      "!#{source}/test/**/*"
+      "!#{source}/test" ]
+
+    .pipe gulp.dest build
+
 ### Dist ###
 gulp.task 'dist-build', ->
   gulp
