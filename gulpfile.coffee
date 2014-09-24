@@ -34,6 +34,12 @@ gulp.task 'clean-dist', (cb) ->
 gulp.task 'clean', (cb) ->
   runSequence ['clean-build', 'clean-dist'], cb
 
+### Copy Lib ###
+gulp.task 'copy-build-lib', ->
+  gulp
+  .src mainBowerFiles()
+  .pipe gulp.dest "#{build}/lib"
+
 ### Copy ###
 gulp.task 'copy-build-source', ->
   gulp
