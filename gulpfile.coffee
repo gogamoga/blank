@@ -126,46 +126,12 @@ gulp.task 'jshint', (cb) ->
 
 ### Angular Build ###
 
-gulp.task 'build-ng', (cb) ->
-  runSequence [
-    'build-ng-controllers', 'build-ng-directives'
-    'build-ng-factories', 'build-ng-services'
-    'build-ng-modules' ], cb
-
-gulp.task 'build-ng-controllers', ->
+gulp.task 'build-ng-coffee', (cb) ->
   gulp
-    .src ["#{source}/scripts/controller/**/*.coffee"]
+    .src [ "#{source}/app/**/*.coffee" ]
     .pipe ngClassify()
     .pipe coffee(bare:false).on 'error', util.log
-    .pipe gulp.dest build
-
-gulp.task 'build-ng-services', ->
-  gulp
-    .src ["#{source}/scripts/controller/**/*.coffee"]
-    .pipe ngClassify()
-    .pipe coffee(bare:false).on 'error', util.log
-    .pipe gulp.dest build
-
-gulp.task 'build-ng-factories', ->
-  gulp
-    .src ["#{source}/scripts/controller/**/*.coffee"]
-    .pipe ngClassify()
-    .pipe coffee(bare:false).on 'error', util.log
-    .pipe gulp.dest build
-
-gulp.task 'build-ng-modules', ->
-  gulp
-    .src ["#{source}/scripts/controller/**/*.coffee"]
-    .pipe ngClassify()
-    .pipe coffee(bare:false).on 'error', util.log
-    .pipe gulp.dest build
-
-gulp.task 'build-ng-directives', ->
-  gulp
-    .src ["#{source}/scripts/controller/**/*.coffee"]
-    .pipe ngClassify()
-    .pipe coffee(bare:false).on 'error', util.log
-    .pipe gulp.dest build
+    .pipe gulp.dest "#{build}/app"
 
 ### Build ###
 
@@ -175,11 +141,8 @@ gulp.task 'build-coffee', ->
       "#{source}/**/*.coffee"
       "!#{source}/test/**/*"
       "!#{source}/test"
-      "!#{source}/scripts/controller"
-      "!#{source}/scripts/directive"
-      "!#{source}/scripts/service"
-      "!#{source}/scripts/factory"
-      "!#{source}/scripts/module" ]
+      "!#{source}/app/**/*"
+      "!#{source}/app" ]
     .pipe coffee(bare:false).on 'error', util.log
     .pipe gulp.dest build
 
@@ -193,7 +156,7 @@ gulp.task 'build-test-coffee', ->
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest "#{build}/test"
 
-gulp.task 'build-test-ng', ->
+gulp.task 'build-test-ng-coffee', ->
   gulp
     .src [ "#{source}/test/app/**/*" ]
     .pipe ngClassify()
