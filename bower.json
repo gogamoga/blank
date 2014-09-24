@@ -1,4 +1,5 @@
 {
+	"name": "app",
   "ignore": [
     "**/.*",
     "node_modules",
