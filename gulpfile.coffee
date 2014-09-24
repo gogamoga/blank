@@ -187,9 +187,18 @@ gulp.task 'build-test-coffee', ->
   gulp
     .src [
       "#{source}/test/**/*.coffee"
-      "!{source}/test/app/scripts/**/*" ]
+      "!#{source}/test/app/**/*"
+      "!#{source}/test/app" ]
+
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest "#{build}/test"
+
+gulp.task 'build-test-ng', ->
+  gulp
+    .src [ "#{source}/test/app/**/*" ]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest "#{build}/test/app"
 
 gulp.task 'build', (cb) ->
   runSequence [ 'build-coffee', 'build-test-coffee', 'copy-build' ], 'concat-build', cb
