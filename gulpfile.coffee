@@ -67,7 +67,13 @@ gulp.task 'copy-dist-source', ->
 
 gulp.task 'copy-dist-test', ->
   gulp
-    .src [ "#{build}/test/**/*", "!#{build}/test/*.js" ]
+    .src [
+      "#{build}/test/**/*"
+      "!#{build}/test/**/*.js"
+      "!#{build}/test/**/*.css"
+      "!#{build}/test/**/*.html"
+      "!#{build}/test/**/*.xml"
+      "!#{build}/test/**/*.xsl" ]
     .pipe gulp.dest test
 
 gulp.task 'copy-dist', (cb) ->
