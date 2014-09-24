@@ -1,15 +1,10 @@
 {
-  "name": "ng",
-  "version": "0.0.0",
-  "authors": [
-    "gogamoga <gogamoga@gmail.com>"
-  ],
-  "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+		"source",
+		"build",
     "test",
     "tests"
   ]
