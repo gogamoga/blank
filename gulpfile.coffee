@@ -16,6 +16,8 @@ ngClassify = require 'gulp-ng-classify'
 ngAnnotate = require 'gulp-ng-annotate'
 mainBowerFiles = require 'main-bower-files'
 
+bowerDirectory = require 'bower-directory'
+
 ### Config ###
 config = require('./package.json')['gulp-config'] or {}
 source = config.source or './source'
@@ -37,7 +39,7 @@ gulp.task 'clean', (cb) ->
 ### Copy Lib ###
 gulp.task 'copy-build-lib', ->
   gulp
-  .src mainBowerFiles()
+  .src mainBowerFiles(), base: bowerDirectory.sync()
   .pipe gulp.dest "#{build}/lib"
 
 ### Copy ###
