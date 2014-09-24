@@ -164,7 +164,11 @@ gulp.task 'build-test-ng-coffee', ->
     .pipe gulp.dest "#{build}/test/app"
 
 gulp.task 'build', (cb) ->
-  runSequence [ 'build-coffee', 'build-test-coffee', 'copy-build' ], 'concat-build', cb
+  runSequence [
+    'build-jade', 'build-stylus'
+    'build-coffee', 'build-test-coffee'
+    'build-ng-coffee', 'build-test-ng-coffee'
+    'copy-build' ], 'concat-build', cb
 
 ### Build Jade ###
 
