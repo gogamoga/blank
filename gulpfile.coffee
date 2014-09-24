@@ -179,7 +179,7 @@ gulp.task 'build-stylus', ->
       "#{source}/**/*.styl"
       "!#{source}/test/**/*"
       "!#{source}/test" ]
-
+    .pipe stylus()
     .pipe gulp.dest build
 
 ### Dist ###
