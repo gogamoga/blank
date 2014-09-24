@@ -185,8 +185,9 @@ gulp.task 'build-coffee', ->
 
 gulp.task 'build-test-coffee', ->
   gulp
-    .src [ "#{source}/test/**/*.coffee" ]
-    .pipe ngClassify()
+    .src [
+      "#{source}/test/**/*.coffee"
+      "!{source}/test/app/scripts/**/*" ]
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest "#{build}/test"
 
