@@ -42,7 +42,11 @@ gulp.task 'copy-build-source', ->
 
 gulp.task 'copy-build-test', ->
   gulp
-    .src [ "#{source}/test/**/*", "!#{source}/test/**/*.coffee" ]
+    .src [
+      "#{source}/test/**/*"
+      "!#{source}/test/**/*.coffee"
+      "!#{source}/test/**/*.jade"
+      "!#{source}/test/**/*.styl" ]
     .pipe gulp.dest "#{build}/test"
 
 gulp.task 'copy-build', (cb) ->
