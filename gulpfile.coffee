@@ -134,9 +134,10 @@ gulp.task 'build-test', ->
 gulp.task 'build', (cb) ->
   runSequence [ 'build-source', 'build-test', 'copy-build' ], 'concat-build', cb
 
-# Build Jade
+### Build Jade ###
 
-gulp.task 'build-jade'
+gulp.task 'build-jade', (cb) ->
+  runSequence [ 'build-jade-html', 'build-jade-xml', 'build-jade-xsl'], cb
 
 gulp.task 'build-jade-html', ->
   gulp
@@ -162,6 +163,16 @@ gulp.task 'build-jade-xsl', ->
   gulp
     .src [
       "#{source}/**/*.xsl.jade"
+      "!#{source}/test/**/*"
+      "!#{source}/test" ]
+
+    .pipe gulp.dest build
+
+### Build Stylus ###
+gulp.task 'build-stylus', ->
+  gulp
+    .src [
+      "#{source}/**/*.styl"
       "!#{source}/test/**/*"
       "!#{source}/test" ]
 
