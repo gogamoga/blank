@@ -149,7 +149,7 @@ gulp.task 'build-jade-html', ->
       "!#{source}/**/*.xsl.jade"
       "!#{source}/test/**/*"
       "!#{source}/test" ]
-
+    .pipe jade()
     .pipe gulp.dest build
 
 gulp.task 'build-jade-xml', ->
@@ -158,7 +158,8 @@ gulp.task 'build-jade-xml', ->
       "#{source}/**/*.xml.jade"
       "!#{source}/test/**/*"
       "!#{source}/test" ]
-
+    .pipe jade()
+    .pipe rename extname: ""
     .pipe gulp.dest build
 
 gulp.task 'build-jade-xsl', ->
@@ -167,7 +168,8 @@ gulp.task 'build-jade-xsl', ->
       "#{source}/**/*.xsl.jade"
       "!#{source}/test/**/*"
       "!#{source}/test" ]
-
+    .pipe jade()
+    .pipe rename extname: ""
     .pipe gulp.dest build
 
 ### Build Stylus ###
