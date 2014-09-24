@@ -131,7 +131,7 @@ gulp.task 'build-coffee', ->
     .pipe coffee(bare:true).on 'error', util.log
     .pipe gulp.dest build
 
-gulp.task 'build-test', ->
+gulp.task 'build-test-coffee', ->
   gulp
     .src [ "#{source}/test/**/*.coffee" ]
     .pipe ngClassify()
@@ -139,7 +139,7 @@ gulp.task 'build-test', ->
     .pipe gulp.dest "#{build}/test"
 
 gulp.task 'build', (cb) ->
-  runSequence [ 'build-coffee', 'build-test', 'copy-build' ], 'concat-build', cb
+  runSequence [ 'build-coffee', 'build-test-coffee', 'copy-build' ], 'concat-build', cb
 
 ### Build Jade ###
 
