@@ -14,6 +14,7 @@ runSequence = require 'run-sequence'
 
 ngClassify = require 'gulp-ng-classify'
 ngAnnotate = require 'gulp-ng-annotate'
+mainBowerFiles = require 'main-bower-files'
 
 ### Config ###
 config = require('./package.json')['gulp-config'] or {}
