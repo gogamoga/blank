@@ -36,12 +36,6 @@ gulp.task 'clean-dist', (cb) ->
 gulp.task 'clean', (cb) ->
   runSequence ['clean-build', 'clean-dist'], cb
 
-### Copy Lib ###
-gulp.task 'copy-build-lib', ->
-  gulp
-  .src mainBowerFiles(), base: bowerDirectory.sync()
-  .pipe gulp.dest "#{build}/lib"
-
 ### Copy ###
 gulp.task 'copy-build-source', ->
   gulp
@@ -63,8 +57,16 @@ gulp.task 'copy-build-test', ->
       "!#{source}/test/**/*.styl" ]
     .pipe gulp.dest "#{build}/test"
 
+gulp.task 'copy-build-lib', ->
+  gulp
+  .src mainBowerFiles(), base: bowerDirectory.sync()
+  .pipe gulp.dest "#{build}/lib"
+
 gulp.task 'copy-build', (cb) ->
-  runSequence [ 'copy-build-source', 'copy-build-test' ], cb
+  runSequence [
+    'copy-build-lib'
+    'copy-build-source'
+    'copy-build-test' ], cb
 
 gulp.task 'copy-dist-source', ->
   gulp
