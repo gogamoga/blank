@@ -12,6 +12,12 @@ coffeelint = require 'gulp-coffeelint'
 del = require 'del'
 runSequence = require 'run-sequence'
 
+ngClassify = require 'gulp-ng-classify'
+ngAnnotate = require 'gulp-ng-annotate'
+mainBowerFiles = require 'main-bower-files'
+
+bowerDirectory = require 'bower-directory'
+
 ### Config ###
 config = require('./package.json')['gulp-config'] or {}
 source = config.source or './source'
@@ -29,6 +35,12 @@ gulp.task 'clean-dist', (cb) ->
 
 gulp.task 'clean', (cb) ->
   runSequence ['clean-build', 'clean-dist'], cb
+
+### Copy Lib ###
+gulp.task 'copy-build-lib', ->
+  gulp
+  .src mainBowerFiles(), base: bowerDirectory.sync()
+  .pipe gulp.dest "#{build}/lib"
 
 ### Copy ###
 gulp.task 'copy-build-source', ->
@@ -120,21 +132,51 @@ gulp.task 'jshint-test', ->
 gulp.task 'jshint', (cb) ->
   runSequence ['jshint-source', 'jshint-test'], cb
 
+### Angular Build ###
+
+gulp.task 'build-ng-coffee', (cb) ->
+  gulp
+    .src [ "#{source}/app/**/*.coffee" ]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest "#{build}/app"
+
 ### Build ###
+
 gulp.task 'build-coffee', ->
   gulp
-    .src [ "#{source}/**/*.coffee", "!#{source}/test/**/*", "!#{source}/test" ]
-    .pipe coffee(bare:true).on 'error', util.log
+    .src [
+      "#{source}/**/*.coffee"
+      "!#{source}/test/**/*"
+      "!#{source}/test"
+      "!#{source}/app/**/*"
+      "!#{source}/app" ]
+    .pipe coffee(bare:false).on 'error', util.log
     .pipe gulp.dest build
 
-gulp.task 'build-test', ->
+gulp.task 'build-test-coffee', ->
   gulp
-    .src [ "#{source}/test/**/*.coffee" ]
-    .pipe coffee(bare:true).on 'error', util.log
+    .src [
+      "#{source}/test/**/*.coffee"
+      "!#{source}/test/app/**/*"
+      "!#{source}/test/app" ]
+
+    .pipe coffee(bare:false).on 'error', util.log
     .pipe gulp.dest "#{build}/test"
 
+gulp.task 'build-test-ng-coffee', ->
+  gulp
+    .src [ "#{source}/test/app/**/*" ]
+    .pipe ngClassify()
+    .pipe coffee(bare:false).on 'error', util.log
+    .pipe gulp.dest "#{build}/test/app"
+
 gulp.task 'build', (cb) ->
-  runSequence [ 'build-coffee', 'build-test', 'copy-build' ], 'concat-build', cb
+  runSequence [
+    'build-jade', 'build-stylus'
+    'build-coffee', 'build-test-coffee'
+    'build-ng-coffee', 'build-test-ng-coffee'
+    'copy-build' ], 'concat-build', cb
 
 ### Build Jade ###
 

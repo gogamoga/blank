@@ -1,7 +1,7 @@
-DEVELOPMENT-NODE-COFFEESCRIPT
+DEVELOPMENT-ANGULAR
 ===
 
-Generic nodejs project in coffeescript
+Angular development scaffold
 
 Usage
 ---
@@ -26,6 +26,10 @@ Gulp plugins
 * [`gulp-coffeelint`](https://github.com/janraasch/gulp-coffeelint)
 * [`gulp-js-prettify`](https://github.com/mackers/gulp-js-prettify)
 * [`gulp-util`](https://github.com/gulpjs/gulp-util)
+* [`gulp-coffee`](https://github.com/wearefractal/gulp-coffee)
+* [`gulp-jade`](https://github.com/phated/gulp-jade)
+* [`gulp-stylus`](https://github.com/stevelacy/gulp-stylus)
+* [`gulp-ng-classify`](https://github.com/CaryLandholt/ng-classify)
 
 License
 ---

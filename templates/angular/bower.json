@@ -1,0 +1,16 @@
+{
+  "name": "app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "source",
+		"lib",
+    "build",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25"
+  }
+}
