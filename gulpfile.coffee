@@ -161,7 +161,7 @@ gulp.task 'build-test-coffee', ->
       "!#{source}/test/app/**/*"
       "!#{source}/test/app" ]
 
-    .pipe coffee(bare:true).on 'error', util.log
+    .pipe coffee(bare:false).on 'error', util.log
     .pipe gulp.dest "#{build}/test"
 
 gulp.task 'build-test-ng-coffee', ->
